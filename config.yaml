@@ -4,7 +4,6 @@ taxonomies:
   stub: stub
 disableKinds:
   - RSS
-  - taxonomy
 outputs:
   home:
     - HTML
