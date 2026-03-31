@@ -1,0 +1,29 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}" class="section section--pillars">
+  <div class="container container--lg">
+    {{ if $section.title }}
+    <h2 class="section__title line-top">{{ $section.title }}</h2>
+    {{ end }}
+    {{ if $section.subtitle }}
+    <p class="section__subtitle">{{ $section.subtitle }}</p>
+    {{ end }}
+    
+    <div class="grid pillars-grid">
+      {{ range $index, $pillar := $section.pillars }}
+      <div class="cell pillar-item">
+        <div class="pillar-item__number">{{ printf "%02d" (add $index 1) }}</div>
+        <div class="pillar-item__content">
+          {{ if $pillar.title }}
+          <h3 class="pillar-item__title">{{ $pillar.title }}</h3>
+          {{ end }}
+          {{ if $pillar.content }}
+          <div class="pillar-item__body text-block">
+            {{ partial "markdownify-block" $pillar.content }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

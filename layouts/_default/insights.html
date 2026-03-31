@@ -1,0 +1,41 @@
+{{ define "content" }}
+
+{{ $layout_style := .Params.layout_style | default "mosaic" }}
+
+<header class="section section--header{{ if .Params.hide_title }} screen-reader-text{{ end }}">
+  <div class="container container--lg">
+    <h1 class="section__title line-top">{{ .Params.title }}</h1>
+    {{ if .Params.subtitle }}
+    <p class="section__subtitle">{{ $.Params.subtitle }}</p>
+    {{ end }}
+  </div>
+</header>
+
+<div class="section section--insights">
+  <div class="container container--lg">
+    <div class="grid insight-feed insight-feed--{{ $layout_style }}">
+      {{ $insights_sorted := ((.Site.GetPage "section" "/insights").Pages).ByDate.Reverse }}
+      {{ range $insight := $insights_sorted }}
+      <article class="cell insight-card">
+        <a href="{{ $insight.RelPermalink }}" class="insight-card__link">
+          {{ if $insight.Params.thumb_image }}
+          <div class="insight-card__image">
+            <img src="{{ $insight.Params.thumb_image | relURL }}" alt="{{ $insight.Params.thumb_image_alt }}" />
+          </div>
+          {{ end }}
+          <header class="insight-card__header">
+            <h2 class="insight-card__title">{{ $insight.Params.title }}</h2>
+            {{ if $insight.Params.subtitle }}
+            <div class="insight-card__subtitle">
+              {{ $insight.Params.subtitle }}
+            </div>
+            {{ end }}
+          </header>
+        </a>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{ end }}

@@ -1,0 +1,15 @@
+.section--booking {
+  .booking-portal {
+    border: 1px solid $color-gray-100;
+    border-radius: 8px;
+    padding: 1px; // Minimalist wrap
+    overflow: hidden;
+    margin-top: 2.5em;
+    min-height: 600px;
+    background: transparent;
+
+    .palette-dark & {
+      border-color: $color-gray-700;
+    }
+  }
+}

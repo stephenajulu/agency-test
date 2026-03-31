@@ -1,0 +1,75 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}" class="section section--stack-map">
+  <div class="container container--lg text-center">
+    {{ if $section.title }}
+    <h2 class="section__title line-top">{{ $section.title }}</h2>
+    {{ end }}
+    {{ if $section.subtitle }}
+    <p class="section__subtitle">{{ $section.subtitle }}</p>
+    {{ end }}
+
+    <div class="stack-map-container">
+      <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" class="stack-engine-svg" xmlns="http://www.w3.org/2000/svg">
+        <!-- Connection Lines -->
+        <g class="engine-connections">
+          <!-- Central to Outer -->
+          <line x1="400" y1="250" x2="200" y2="100" class="connection line-solid" />
+          <line x1="400" y1="250" x2="600" y2="100" class="connection line-dashed" />
+          <line x1="400" y1="250" x2="650" y2="250" class="connection line-solid" />
+          <line x1="400" y1="250" x2="600" y2="400" class="connection line-dashed" />
+          <line x1="400" y1="250" x2="200" y2="400" class="connection line-solid" />
+          <line x1="400" y1="250" x2="150" y2="250" class="connection line-dashed" />
+          
+          <!-- Cross Connections -->
+          <path d="M200,100 Q400,50 600,100" class="connection line-dashed" fill="none" />
+          <path d="M200,400 Q400,450 600,400" class="connection line-solid" fill="none" />
+        </g>
+
+        <!-- Nodes -->
+        <g class="engine-nodes">
+          <!-- Central Core -->
+          <g class="node node--core">
+            <circle cx="400" cy="250" r="40" />
+            <text x="400" y="255" text-anchor="middle" class="node-label">ENGINE</text>
+          </g>
+
+          <!-- Cloud Node -->
+          <g class="node node--service" transform="translate(200, 100)">
+            <circle r="30" />
+            <text y="45" text-anchor="middle" class="node-label">CLOUD</text>
+          </g>
+
+          <!-- ERP Node -->
+          <g class="node node--service" transform="translate(600, 100)">
+            <circle r="30" />
+            <text y="45" text-anchor="middle" class="node-label">ERP</text>
+          </g>
+
+          <!-- Automation Node -->
+          <g class="node node--service" transform="translate(650, 250)">
+            <circle r="30" />
+            <text y="45" text-anchor="middle" class="node-label">AUTOMATION</text>
+          </g>
+
+          <!-- Sovereignty Node -->
+          <g class="node node--service" transform="translate(600, 400)">
+            <circle r="30" />
+            <text y="45" text-anchor="middle" class="node-label">SOVEREIGNTY</text>
+          </g>
+
+          <!-- Data Node -->
+          <g class="node node--service" transform="translate(200, 400)">
+            <circle r="30" />
+            <text y="45" text-anchor="middle" class="node-label">DATA</text>
+          </g>
+
+          <!-- Security Node -->
+          <g class="node node--service" transform="translate(150, 250)">
+            <circle r="30" />
+            <text y="45" text-anchor="middle" class="node-label">SECURITY</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>

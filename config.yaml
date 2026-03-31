@@ -1,0 +1,22 @@
+title: Stackbit Agency Theme
+baseURL: /
+taxonomies:
+  stub: stub
+disableKinds:
+  - RSS
+  - taxonomy
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+  section:
+    - HTML
+    - RSS
+    - JSON
+  page:
+    - HTML
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

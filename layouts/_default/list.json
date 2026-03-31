@@ -1,0 +1,12 @@
+[
+  {{ range $index, $page := .Pages }}
+  {{ if $index }},{{ end }}
+  {
+    "title": {{ $page.Title | jsonify }},
+    "date": {{ $page.Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+    "url": {{ $page.RelPermalink | jsonify }},
+    "excerpt": {{ $page.Params.excerpt | default "" | jsonify }},
+    "type": {{ $page.Params.insight_type | default "article" | jsonify }}
+  }
+  {{ end }}
+]

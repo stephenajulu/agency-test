@@ -1,0 +1,53 @@
+{{ define "content" }}
+
+<article class="insight">
+  <header class="insight__header">
+    <div class="container container--md">
+      <h1 class="insight__title line-top">{{ .Params.title }}</h1>
+      {{ if .Params.subtitle }}
+      <div class="insight__subtitle">
+        {{ $.Params.subtitle }}
+      </div>
+      {{ end }}
+    </div>
+  </header>
+  <div class="insight__body">
+      {{ range $section := .Params.sections }}
+        {{ $include_dict := dict "section" $section "Site" $.Site }}
+        {{ $component := print $section.type ".html" }}
+        {{ partial $component $include_dict }}
+      {{ end }}
+  </div>
+</article>
+
+{{ $insights_sorted := ((.Site.GetPage "section" "/insights").Pages).ByDate.Reverse }}
+{{ $insight_item_len := len $insights_sorted }}
+{{ range $insight_item_idx, $insight_item := $insights_sorted }}
+  {{ if eq $insight_item.RelPermalink $.RelPermalink }}
+    {{ $curr_index := $insight_item_idx }}
+    {{ $next_index := add $curr_index 1 }}
+    {{ $prev_index := sub $curr_index 1 }}
+    {{ $insight_index_length := sub $insight_item_len 1 }}
+    {{ if gt $insight_index_length 0 }}
+    <nav class="section section--insights">
+      <div class="container container--lg">
+        <h2 class="section__title line-top">More Insights</h2>
+        <div class="grid insight-feed insight-feed--tiles">
+          {{ if ne $curr_index 0 }}
+            {{ $prev_insight := index $insights_sorted $prev_index }}
+            {{ $include_dict := dict "insight_page" $prev_insight }}
+            {{ partial "insight_item.html" $include_dict }}
+          {{ end }}
+          {{ if lt $curr_index $insight_index_length }}
+            {{ $next_insight := index $insights_sorted $next_index }}
+            {{ $include_dict := dict "insight_page" $next_insight }}
+            {{ partial "insight_item.html" $include_dict }}
+          {{ end }}
+        </div>
+      </div>
+    </nav>
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ end }}

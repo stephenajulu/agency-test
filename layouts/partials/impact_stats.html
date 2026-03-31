@@ -1,0 +1,16 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}" class="section section--impact-stats">
+  <div class="container container--lg">
+    <div class="impact-stats-grid">
+      {{ if $section.impact }}
+        {{ range $index, $item := $section.impact }}
+          {{ if $index }}<div class="impact-separator"></div>{{ end }}
+          <div class="impact-item">
+            <div class="impact-item__value">{{ $item.value }}</div>
+            <div class="impact-item__label">{{ $item.label | upper }}</div>
+          </div>
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>

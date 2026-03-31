@@ -1,0 +1,121 @@
+.product-event-card {
+  margin-bottom: 1.66667em;
+  padding: 0 ($grid-gap / 2);
+
+  &__inner {
+    background: transparent;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  &__image-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: 1.5em;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    
+    &:before {
+      content: "";
+      display: block;
+      padding-top: 75%; // 4:3 for products/events
+    }
+
+    img {
+      height: 100%;
+      left: 0;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+
+  &__indicator {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    background: #542bff;
+    color: #fff;
+    padding: 0.4em 0.8em;
+    font-family: map-get($fonts, fraunces);
+    font-size: 0.85em;
+    font-weight: 600;
+    border-radius: 4px;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+    &--download {
+      padding: 0.5em;
+      border-radius: 50%;
+      
+      .icon {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+    }
+  }
+
+  &__event-meta {
+    color: #542bff;
+    font-family: map-get($fonts, fraunces);
+    font-size: 0.9em;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.02em;
+  }
+
+  &__label {
+    font-family: map-get($fonts, fraunces);
+    font-size: 0.75em;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: $color-gray-400;
+    margin-bottom: 0.5em;
+    display: inline-block;
+  }
+
+  &__title {
+    font-family: map-get($fonts, fraunces);
+    font-size: 1.4em;
+    margin: 0 0 0.5em 0;
+    line-height: 1.2;
+
+    a {
+      border: 0;
+      color: $color-gray-900;
+      
+      .palette-dark & {
+        color: #fff;
+      }
+    }
+  }
+
+  &__body {
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: $color-gray-500;
+    margin-bottom: 1.5em;
+    flex-grow: 1;
+  }
+
+  &__actions {
+    .button--small {
+      padding: 0.5em 1.2em;
+      font-size: 0.85em;
+      font-family: map-get($fonts, fraunces);
+      font-weight: 500;
+    }
+  }
+}

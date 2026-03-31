@@ -1,0 +1,58 @@
+{{ $section := .section }}
+{{ $featured_insights := where (where .Site.RegularPages "Section" "insights") "Params.featured" true }}
+
+{{ if $featured_insights }}
+<section id="{{ $section.section_id }}" class="section section--featured-slider">
+  <div class="container container--lg">
+    <div class="featured-slider js-featured-slider">
+      <div class="featured-slider__track">
+        {{ range $insight := $featured_insights }}
+        <div class="featured-slider__item slide">
+          <div class="featured-slider__badge">Featured</div>
+          <div class="grid grid--align-center">
+            {{ if $insight.Params.thumb_image }}
+            <div class="cell featured-slider__image">
+              {{ $image := resources.Get $insight.Params.thumb_image }}
+              {{ if $image }}
+                {{ $processed := $image.Fill "1200x600" }}
+                <img src="{{ $processed.Permalink }}" alt="{{ $insight.Params.thumb_image_alt }}" />
+              {{ else }}
+                <img src="{{ $insight.Params.thumb_image | relURL }}" alt="{{ $insight.Params.thumb_image_alt }}" />
+              {{ end }}
+            </div>
+            {{ end }}
+            <div class="cell featured-slider__content">
+              <h2 class="featured-slider__title line-top">
+                <a href="{{ $insight.RelPermalink }}">{{ $insight.Params.title }}</a>
+              </h2>
+              {{ if $insight.Params.subtitle }}
+              <p class="featured-slider__subtitle">{{ $insight.Params.subtitle }}</p>
+              {{ end }}
+              {{ if $insight.Params.excerpt }}
+              <div class="featured-slider__body text-block">
+                {{ $insight.Params.excerpt }}
+              </div>
+              {{ end }}
+              <div class="featured-slider__actions">
+                <a href="{{ $insight.RelPermalink }}" class="button button--secondary">Read Insight</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      
+      {{ if gt (len $featured_insights) 1 }}
+      <div class="featured-slider__nav">
+        <button class="featured-slider__prev js-slider-prev" aria-label="Previous Slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="featured-slider__next js-slider-next" aria-label="Next Slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l6 6-6 6"/></svg>
+        </button>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

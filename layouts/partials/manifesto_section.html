@@ -1,0 +1,18 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}" class="section section--manifesto palette-dark">
+  <div class="container container--lg">
+    <div class="manifesto-content">
+      {{ if $section.manifesto_text }}
+        <h2 class="manifesto-text">
+          {{ $text := $section.manifesto_text }}
+          {{ if $section.highlight_word }}
+            {{ $highlight := printf "<span class='text-accent'>%s</span>" $section.highlight_word }}
+            {{ replace $text $section.highlight_word $highlight | safeHTML }}
+          {{ else }}
+            {{ $text | safeHTML }}
+          {{ end }}
+        </h2>
+      {{ end }}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}" class="section section--counter">
+  <div class="container container--lg">
+    {{ if $section.title }}
+    <h2 class="section__title line-top">{{ $section.title }}</h2>
+    {{ end }}
+    {{ if $section.subtitle }}
+    <p class="section__subtitle">{{ $section.subtitle }}</p>
+    {{ end }}
+    {{ if $section.stats }}
+    <div class="grid grid--col-{{ len $section.stats | default "three" }}">
+      {{ range $stat := $section.stats }}
+      <div class="cell counter-item text-center">
+        <div class="counter-item__number">
+          <span class="value">{{ $stat.number }}</span>{{ if $stat.suffix }}<span class="suffix">{{ $stat.suffix }}</span>{{ end }}
+        </div>
+        {{ if $stat.label }}
+        <div class="counter-item__label">{{ $stat.label }}</div>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>

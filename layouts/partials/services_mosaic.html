@@ -1,0 +1,36 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}" class="section section--services-mosaic">
+  <div class="container container--lg">
+    {{ if $section.title }}
+    <h2 class="section__title line-top">{{ $section.title }}</h2>
+    {{ end }}
+    {{ if $section.subtitle }}
+    <p class="section__subtitle">{{ $section.subtitle }}</p>
+    {{ end }}
+    <div class="grid services-mosaic services-mosaic--mosaic">
+      {{ range $item := $section.services }}
+      <div class="cell service-mosaic-card">
+        <div class="service-mosaic-card__inner">
+          <div class="service-mosaic-card__marker"></div>
+          <header class="service-mosaic-card__header">
+            {{ if $item.title }}
+            <h3 class="service-mosaic-card__title">{{ $item.title }}</h3>
+            {{ end }}
+          </header>
+          {{ if $item.content }}
+          <div class="service-mosaic-card__body text-block">
+            {{ partial "markdownify-block" $item.content }}
+          </div>
+          {{ end }}
+          {{ if $item.actions }}
+          <div class="service-mosaic-card__actions button-group">
+            {{ $include_dict := dict "actions" $item.actions }}
+            {{ partial "cta_buttons.html" $include_dict }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

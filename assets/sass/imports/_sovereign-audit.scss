@@ -1,0 +1,105 @@
+.section--sovereign-audit {
+  .audit-form {
+    background: transparent;
+  }
+
+  .audit-question {
+    margin-bottom: 2.5em;
+
+    &__label {
+      display: block;
+      font-family: map-get($fonts, fraunces);
+      font-size: 1.2em;
+      font-weight: 600;
+      margin-bottom: 1em;
+      color: $color-gray-800;
+
+      .palette-dark & {
+        color: #fff;
+      }
+    }
+  }
+
+  .audit-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+
+  .audit-option {
+    position: relative;
+
+    input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+
+      &:checked + label {
+        background: #542bff;
+        color: #fff;
+        border-color: #542bff;
+      }
+    }
+
+    label {
+      display: inline-block;
+      padding: 0.6em 1.5em;
+      font-family: map-get($fonts, fraunces);
+      font-size: 0.9em;
+      font-weight: 500;
+      border: 1px solid $color-gray-100;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #fff;
+      color: $color-gray-600;
+      margin: 0;
+
+      .palette-dark & {
+        background: $color-gray-800;
+        border-color: $color-gray-700;
+        color: $color-gray-300;
+      }
+
+      &:hover {
+        border-color: #542bff;
+      }
+    }
+  }
+
+  .audit-email {
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 1px solid $color-gray-100;
+
+    .palette-dark & {
+      border-top-color: $color-gray-800;
+    }
+
+    input {
+      font-family: map-get($fonts, fraunces);
+      font-size: 1.1em;
+      padding: 0.8em 0;
+    }
+  }
+
+  .audit-submit-btn {
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid #542bff;
+    color: #542bff;
+    font-family: map-get($fonts, fraunces);
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 0.5em 0;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    text-transform: none;
+    letter-spacing: normal;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}

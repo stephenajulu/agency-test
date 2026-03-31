@@ -1,0 +1,72 @@
+{{ $item := .item_page }}
+{{ $type := $item.Params.item_type | default "product" }}
+
+<article class="cell product-event-card product-event-card--{{ $type }}">
+  <div class="product-event-card__inner">
+    {{ if $item.Params.thumb_image }}
+    <div class="product-event-card__image-wrap">
+      <a class="product-event-card__image" href="{{ $item.RelPermalink }}">
+        {{ $image := resources.Get $item.Params.thumb_image }}
+        {{ if $image }}
+          {{ $processed := $image.Fill "800x600" }}
+          <img src="{{ $processed.Permalink }}" alt="{{ $item.Params.thumb_image_alt }}" />
+        {{ else }}
+          <img src="{{ $item.Params.thumb_image | relURL }}" alt="{{ $item.Params.thumb_image_alt }}" />
+        {{ end }}
+      </a>
+      
+      {{ if eq $type "product" }}
+        {{ if $item.Params.price }}
+        <div class="product-event-card__indicator product-event-card__indicator--price">
+          {{ $item.Params.price }}
+        </div>
+        {{ else if $item.Params.download_url }}
+        <div class="product-event-card__indicator product-event-card__indicator--download">
+          {{ partial "icon.html" (dict "icon" "document") }}
+        </div>
+        {{ end }}
+      {{ end }}
+    </div>
+    {{ end }}
+
+    <div class="product-event-card__content">
+      <header class="product-event-card__header">
+        {{ if eq $type "event" }}
+          {{ if $item.Params.event_date }}
+          <div class="product-event-card__event-meta">
+            {{ $item.Params.event_date }} {{ if $item.Params.event_time }}| {{ $item.Params.event_time }}{{ end }}
+          </div>
+          {{ end }}
+        {{ end }}
+
+        <div class="product-event-card__label-wrap">
+          <span class="product-event-card__label">{{ $type | upper }}</span>
+        </div>
+        
+        <h3 class="product-event-card__title">
+          <a href="{{ $item.RelPermalink }}">{{ $item.Params.title }}</a>
+        </h3>
+      </header>
+
+      {{ if $item.Params.excerpt }}
+      <div class="product-event-card__body text-block">
+        {{ $item.Params.excerpt }}
+      </div>
+      {{ end }}
+
+      <footer class="product-event-card__actions">
+        {{ if eq $type "product" }}
+          {{ if $item.Params.download_url }}
+          <a href="{{ $item.Params.download_url | relURL }}" class="button button--secondary button--small" download>Download Now</a>
+          {{ else if $item.Params.buy_url }}
+          <a href="{{ $item.Params.buy_url }}" class="button button--secondary button--small">Purchase</a>
+          {{ else }}
+          <a href="{{ $item.RelPermalink }}" class="button button--secondary button--small">View Details</a>
+          {{ end }}
+        {{ else if eq $type "event" }}
+          <a href="{{ $item.RelPermalink }}" class="button button--secondary button--small">Register for Event</a>
+        {{ end }}
+      </footer>
+    </div>
+  </div>
+</article>

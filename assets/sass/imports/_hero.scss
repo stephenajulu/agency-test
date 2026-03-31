@@ -1,0 +1,59 @@
+.hero {
+  margin-bottom: 3.33333em;
+  padding-bottom: 1.66667em;
+  text-align: center; // Center content
+
+  &__title {
+    font-size: 2.22222em;
+    font-weight: 700; // Larger weight
+    margin-left: auto;
+    margin-right: auto;
+    max-width: $container-md;
+  }
+
+  &__body {
+    font-size: 1.11111em;
+    line-height: 1.5;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: $container-md;
+  }
+
+  &__body {
+    &:not(:first-child) {
+      margin-top: 2.5em;
+    }
+  }
+
+  &__actions {
+    margin-top: 3.5em; // Separation from text
+    font-size: 1.11111em;
+    justify-content: center;
+
+    .button {
+      font-size: inherit;
+    }
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .hero {
+    margin-bottom: 5em;
+
+    &__title {
+      font-size: 2.66667em;
+    }
+
+    &__body {
+      font-size: 1.33333em;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .hero {
+    &__title {
+      font-size: 3.33333em;
+    }
+  }
+}

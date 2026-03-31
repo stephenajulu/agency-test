@@ -1,0 +1,101 @@
+.section--values {
+  .values-grid {
+    @media only screen and (min-width: 768px) {
+      align-items: stretch;
+    }
+
+    &__left {
+      @media only screen and (min-width: 768px) {
+        flex: 0 0 45%;
+        max-width: 45%;
+        padding-right: 3em;
+        border-right: 2px solid #542bff; // Vertical separator
+      }
+    }
+
+    &__right {
+      @media only screen and (min-width: 768px) {
+        flex: 0 0 55%;
+        max-width: 55%;
+        padding-left: 4em;
+      }
+      
+      @media only screen and (max-width: 767px) {
+        margin-top: 3em;
+        padding-top: 3em;
+        border-top: 2px solid #542bff;
+      }
+    }
+  }
+
+  .values-statement {
+    font-family: map-get($fonts, fraunces);
+    font-size: 2.2em;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+    color: $color-gray-900;
+
+    .palette-dark & {
+      color: #fff;
+    }
+
+    @media only screen and (min-width: 768px) {
+      position: sticky;
+      top: 20vh;
+    }
+  }
+
+  .values-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &__item {
+      display: flex;
+      gap: 1.5em;
+      margin-bottom: 3em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .value-marker {
+    flex: 0 0 12px;
+    height: 12px;
+    width: 12px;
+    background: #542bff;
+    margin-top: 0.6em;
+    transform: rotate(45deg); // Geometric node
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border: 1px solid rgba(#542bff, 0.3);
+    }
+  }
+
+  .value-title {
+    font-family: map-get($fonts, fraunces);
+    font-size: 1.4em;
+    margin: 0 0 0.5em 0;
+    font-weight: 600;
+  }
+
+  .value-body {
+    font-size: 1.05em;
+    line-height: 1.8; // Maximum readability
+    color: $color-gray-500;
+
+    .palette-dark & {
+      color: $color-gray-400;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+.section--counter {
+  .counter-item {
+    margin-bottom: 2em;
+
+    @media only screen and (min-width: 768px) {
+      margin-bottom: 0;
+    }
+
+    &__number {
+      font-family: map-get($fonts, fraunces);
+      font-size: 3.5em;
+      font-weight: 700;
+      color: $color-accent; // #542bff
+      line-height: 1;
+      margin-bottom: 0.2em;
+
+      @media only screen and (min-width: 768px) {
+        font-size: 4.5em;
+      }
+
+      .suffix {
+        font-size: 0.5em;
+        vertical-align: middle;
+        margin-left: 0.05em;
+      }
+    }
+
+    &__label {
+      font-size: 0.85em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: $color-gray-400;
+      font-weight: 600;
+    }
+  }
+}

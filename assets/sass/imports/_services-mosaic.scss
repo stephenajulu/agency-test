@@ -1,0 +1,101 @@
+.section--services-mosaic {
+  .services-mosaic {
+    &--mosaic {
+      @media only screen and (min-width: 768px) {
+        .service-mosaic-card {
+          -ms-flex: 0 0 60%;
+          flex: 0 0 60%;
+          max-width: 60%;
+
+          &:nth-child(4n+2),
+          &:nth-child(4n+3) {
+            -ms-flex: 0 0 40%;
+            flex: 0 0 40%;
+            max-width: 40%;
+          }
+        }
+      }
+    }
+  }
+
+  .service-mosaic-card {
+    margin-bottom: $grid-gap;
+    padding: 0 ($grid-gap / 2);
+    display: flex;
+
+    &__inner {
+      background: $color-gray-50;
+      padding: 3em;
+      width: 100%;
+      position: relative;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      border: 1px solid rgba($color-gray-100, 0.5);
+      display: flex;
+      flex-direction: column;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      }
+    }
+
+    &__marker {
+      position: absolute;
+      top: 2em;
+      right: 2em;
+      width: 24px;
+      height: 24px;
+      border: 2px solid #542bff;
+      
+      &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 8px;
+        height: 8px;
+        background: #542bff;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &__title {
+      font-family: map-get($fonts, fraunces);
+      font-size: 1.8em;
+      margin-top: 0;
+      margin-bottom: 1em;
+      font-weight: 600;
+      color: $color-gray-900;
+    }
+
+    &__body {
+      font-size: 1.05em;
+      line-height: 1.6;
+      color: $color-gray-600;
+      flex-grow: 1;
+    }
+
+    &__actions {
+      margin-top: 2.5em;
+    }
+  }
+
+  .palette-dark & {
+    .service-mosaic-card__inner {
+      background: $color-gray-800;
+      border-color: $color-gray-700;
+      
+      &:hover {
+        border-color: rgba(#542bff, 0.5);
+      }
+    }
+
+    .service-mosaic-card__title {
+      color: #fff;
+    }
+
+    .service-mosaic-card__body {
+      color: $color-gray-400;
+    }
+  }
+}

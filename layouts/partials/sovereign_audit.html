@@ -1,0 +1,67 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}" class="section section--sovereign-audit">
+  <div class="container container--lg">
+    <div class="grid">
+      <div class="section__content cell">
+        {{ if $section.title }}
+        <h2 class="section__title line-top">{{ $section.title }}</h2>
+        {{ end }}
+        {{ if $section.subtitle }}
+        <p class="section__subtitle">{{ $section.subtitle }}</p>
+        {{ end }}
+        {{ if $section.content }}
+        <div class="section__body text-block">
+          {{ partial "markdownify-block" $section.content }}
+        </div>
+        {{ end }}
+      </div>
+      <div class="section__form-container cell">
+        <form name="sovereign-audit" id="sovereign-audit" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="audit-form">
+          <div class="screen-reader-text">
+            <label id="audit-bot-label">Don't fill this out if you're human: <input aria-labelledby="audit-bot-label" name="bot-field" /></label>
+          </div>
+          <input type="hidden" name="form-name" value="sovereign-audit" />
+          
+          <div class="audit-questions">
+            {{ range $index, $question := $section.questions }}
+            <div class="audit-question">
+              <label class="audit-question__label">{{ $question.label }}</label>
+              <div class="audit-options">
+                {{ if eq $question.type "yesno" }}
+                  <div class="audit-option">
+                    <input type="radio" name="q{{ $index }}" value="yes" id="q{{ $index }}-yes" required>
+                    <label for="q{{ $index }}-yes">Yes</label>
+                  </div>
+                  <div class="audit-option">
+                    <input type="radio" name="q{{ $index }}" value="no" id="q{{ $index }}-no">
+                    <label for="q{{ $index }}-no">No</label>
+                  </div>
+                {{ else if eq $question.type "priority" }}
+                  {{ range $p_index, $option := $question.options }}
+                  <div class="audit-option">
+                    <input type="radio" name="q{{ $index }}" value="{{ $option }}" id="q{{ $index }}-{{ $p_index }}">
+                    <label for="q{{ $index }}-{{ $p_index }}">{{ $option }}</label>
+                  </div>
+                  {{ end }}
+                {{ end }}
+              </div>
+            </div>
+            {{ end }}
+          </div>
+
+          {{ if $section.email_label }}
+          <div class="audit-email form-group">
+            <label for="audit-email" class="audit-question__label">{{ $section.email_label }}</label>
+            <input type="email" name="email" id="audit-email" required placeholder="intelligence@enterprise.com">
+            <span class="animate-border"></span>
+          </div>
+          {{ end }}
+
+          <div class="form-submit">
+            <button type="submit" class="audit-submit-btn">Request Infrastructure Audit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

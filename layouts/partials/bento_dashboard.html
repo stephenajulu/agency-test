@@ -1,0 +1,45 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}" class="section section--bento">
+  <div class="container container--lg">
+    {{ if $section.title }}
+    <h2 class="section__title line-top">{{ $section.title }}</h2>
+    {{ end }}
+    {{ if $section.subtitle }}
+    <p class="section__subtitle">{{ $section.subtitle }}</p>
+    {{ end }}
+    {{ if $section.bento_items }}
+    <div class="bento-grid">
+      {{ range $item := $section.bento_items }}
+      <div class="bento-item {{ $item.class }}" style="{{ if $item.grid_cols }}grid-column: span {{ $item.grid_cols }};{{ end }}{{ if $item.grid_rows }}grid-row: span {{ $item.grid_rows }};{{ end }}">
+        {{ if $item.image }}
+        <div class="bento-item__image">
+          <img src="{{ $item.image | relURL }}" alt="{{ $item.image_alt }}" />
+        </div>
+        {{ end }}
+        <div class="bento-item__content">
+          {{ if $item.icon }}
+          <div class="bento-item__icon">
+             {{ partial "icon.html" (dict "icon" $item.icon) }}
+          </div>
+          {{ end }}
+          {{ if $item.title }}
+          <h3 class="bento-item__title">{{ $item.title }}</h3>
+          {{ end }}
+          {{ if $item.content }}
+          <div class="bento-item__body text-block">
+            {{ partial "markdownify-block" $item.content }}
+          </div>
+          {{ end }}
+          {{ if $item.actions }}
+          <div class="bento-item__actions button-group">
+            {{ $include_dict := dict "actions" $item.actions }}
+            {{ partial "cta_buttons.html" $include_dict }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>

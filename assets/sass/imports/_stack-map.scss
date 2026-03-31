@@ -1,0 +1,93 @@
+.section--stack-map {
+  .stack-map-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 4em auto 0;
+    position: relative;
+  }
+
+  .stack-engine-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+
+    .node {
+      circle {
+        fill: $color-gray-50;
+        stroke: #542bff;
+        stroke-width: 2;
+        transition: all 0.3s ease;
+      }
+
+      .node-label {
+        font-family: map-get($fonts, fraunces);
+        font-size: 14px;
+        font-weight: 700;
+        fill: $color-gray-800;
+        pointer-events: none;
+      }
+
+      &--core {
+        circle {
+          fill: #542bff;
+          stroke: $color-gray-900;
+          stroke-width: 4;
+        }
+        .node-label {
+          fill: #fff;
+          font-size: 12px;
+        }
+      }
+
+      &:hover circle {
+        fill: rgba(#542bff, 0.1);
+        transform: scale(1.05);
+      }
+
+      &--core:hover circle {
+        fill: #542bff;
+        opacity: 0.9;
+      }
+    }
+
+    .connection {
+      stroke: $color-gray-200;
+      stroke-width: 1.5;
+      
+      &.line-dashed {
+        stroke-dasharray: 5, 5;
+        animation: flow-dash 30s linear infinite;
+      }
+
+      &.line-solid {
+        stroke-opacity: 0.4;
+      }
+    }
+
+    .palette-dark & {
+      .node circle {
+        fill: $color-gray-800;
+        stroke: #542bff;
+      }
+      .node-label {
+        fill: #fff;
+      }
+      .connection {
+        stroke: $color-gray-700;
+      }
+    }
+  }
+}
+
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -200;
+  }
+}
+
+// Mobile responsiveness for SVG labels
+@media only screen and (max-width: 600px) {
+  .stack-engine-svg .node-label {
+    font-size: 18px; // Larger for mobile readability
+  }
+}

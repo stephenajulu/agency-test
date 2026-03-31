@@ -1,0 +1,33 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}" class="section section--values">
+  <div class="container container--lg">
+    <div class="grid values-grid">
+      <div class="cell values-grid__left">
+        {{ if $section.title }}
+        <h2 class="values-statement">{{ $section.title | safeHTML }}</h2>
+        {{ end }}
+      </div>
+      <div class="cell values-grid__right">
+        {{ if $section.values }}
+        <ul class="values-list">
+          {{ range $value := $section.values }}
+          <li class="values-list__item">
+            <div class="value-marker"></div>
+            <div class="value-content">
+              {{ if $value.title }}
+              <h3 class="value-title">{{ $value.title }}</h3>
+              {{ end }}
+              {{ if $value.content }}
+              <div class="value-body text-block">
+                {{ partial "markdownify-block" $value.content }}
+              </div>
+              {{ end }}
+            </div>
+          </li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>

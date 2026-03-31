@@ -1,0 +1,82 @@
+{{ $insight := .insight_page }}
+{{ $type := $insight.Params.insight_type | default "article" }}
+
+<article class="cell insight-card insight-card--{{ $type }}">
+  <div class="insight-card__inner">
+    {{ if $insight.Params.thumb_image }}
+    <div class="insight-card__image-wrap">
+      <a class="insight-card__image" href="{{ $insight.RelPermalink }}">
+        {{ $image := resources.Get $insight.Params.thumb_image }}
+        {{ if $image }}
+          {{ $processed := $image.Fill "800x480" }}
+          <img src="{{ $processed.Permalink }}" alt="{{ $insight.Params.thumb_image_alt }}" />
+        {{ else }}
+          <img src="{{ $insight.Params.thumb_image | relURL }}" alt="{{ $insight.Params.thumb_image_alt }}" />
+        {{ end }}
+      </a>
+      
+      {{ if or (eq $type "video") (eq $type "audio") }}
+      <div class="insight-card__media-overlay">
+        {{ partial "icon.html" (dict "icon" "play") }}
+        <span>Sneak Peek</span>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    <div class="insight-card__content">
+      <header class="insight-card__header">
+        <div class="insight-card__meta">
+          {{ if or (eq $type "research") (eq $type "report") (eq $type "case-study") }}
+          <span class="insight-card__type-icon">{{ partial "icon.html" (dict "icon" "document") }}</span>
+          {{ end }}
+          {{ if eq $type "presentation" }}
+          <span class="insight-card__type-icon">{{ partial "icon.html" (dict "icon" "presentation") }}</span>
+          {{ end }}
+          {{ if eq $type "digital-product" }}
+          <span class="insight-card__type-icon">{{ partial "icon.html" (dict "icon" "document") }}</span>
+          {{ end }}
+          <span class="insight-card__label">{{ $type | upper }}</span>
+        </div>
+        
+        <h3 class="insight-card__title">
+          <a href="{{ $insight.RelPermalink }}">{{ $insight.Params.title }}</a>
+        </h3>
+        
+        {{ if $insight.Params.subtitle }}
+        <div class="insight-card__subtitle">{{ $insight.Params.subtitle }}</div>
+        {{ end }}
+      </header>
+
+      {{ if eq $type "newsletter" }}
+      <div class="insight-card__body text-block">
+        {{ $insight.Content | plainify | truncate 200 }}
+      </div>
+      {{ else if $insight.Params.excerpt }}
+      <div class="insight-card__body text-block">
+        {{ $insight.Params.excerpt }}
+      </div>
+      {{ end }}
+
+      <footer class="insight-card__actions">
+        {{ if eq $type "newsletter" }}
+          <a href="{{ $insight.RelPermalink }}" class="button button--secondary button--small">Subscribe to the Sovereign Stack</a>
+        {{ else if or (eq $type "research") (eq $type "report") (eq $type "case-study") }}
+          {{ if $insight.Params.pdf_url }}
+          <a href="{{ $insight.Params.pdf_url | relURL }}" class="button button--secondary button--small" target="_blank">View/Download PDF</a>
+          {{ else }}
+          <a href="{{ $insight.RelPermalink }}" class="button button--secondary button--small">View Report</a>
+          {{ end }}
+        {{ else if eq $type "presentation" }}
+          <a href="{{ $insight.RelPermalink }}" class="button button--secondary button--small">View Presentation</a>
+        {{ else if or (eq $type "video") (eq $type "audio") }}
+          <a href="{{ $insight.RelPermalink }}" class="button button--secondary button--small">Listen/Watch</a>
+        {{ else if eq $type "digital-product" }}
+          <a href="{{ $insight.Params.download_url | relURL }}" class="button button--secondary button--small" download>Download</a>
+        {{ else }}
+          <a href="{{ $insight.RelPermalink }}" class="button button--secondary button--small">Read More</a>
+        {{ end }}
+      </footer>
+    </div>
+  </div>
+</article>
